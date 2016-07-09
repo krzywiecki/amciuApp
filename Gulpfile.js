@@ -9,6 +9,17 @@ var rename = require('gulp-rename');
 var assetsDir = './assets/';
 var distDir = './dist/';
 
+gulp.task('copyfonts', function() {
+   return gulp.src(assetsDir + 'fontello/font/*.{ttf,woff,eof,svg}')
+        .pipe(gulp.dest(distDir + 'fontello/font'));
+});
+
+gulp.task('icons', function() {
+   return gulp.src(assetsDir + 'fontello/css/*.css')
+        .pipe(concat('icons.css'))
+        .pipe(gulp.dest(distDir + 'css'));
+});
+
 gulp.task('lint', function() {
     return gulp.src(['./node_modules/', assetsDir + 'js/*.js'])
         .pipe(jshint())
@@ -35,4 +46,4 @@ gulp.task('watch', function() {
     gulp.watch(assetsDir + 'styles/*.scss', ['sass']);
 });
 
-gulp.task('default', ['lint', 'sass', 'scripts']);
+gulp.task('default', ['copyfonts', 'icons', 'lint', 'sass', 'scripts']);
