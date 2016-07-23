@@ -20,7 +20,7 @@ gulp.task('copyfonts', function() {
 gulp.task('icons', function() {
    return gulp.src(assetsDir + 'fontello/css/*.css')
         .pipe(concat('icons.css'))
-        .pipe(gulp.dest(distDir + 'css'));
+        .pipe(gulp.dest(distDir + 'fontello/font'));
 });
 
 gulp.task('lint', function() {

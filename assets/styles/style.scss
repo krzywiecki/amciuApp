@@ -1,0 +1,476 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:800,400,400italic,800italic,600,600italic&subset=latin,latin-ext);
+
+@mixin rotate($deg) {
+    -moz-transform: rotate($deg);
+    -webkit-transform: rotate($deg);
+    -o-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+@mixin transition($duration) {
+    -webkit-transition: all $duration ease-in-out;
+    -moz-transition: all $duration ease-in-out;
+    -ms-transition: all $duration ease-in-out;
+    -o-transition: all $duration ease-in-out;
+    transition: all $duration ease-in-out;
+}
+
+@mixin respond-to($breakpoint) {
+    @media all and (max-width: $breakpoint + px) { @content; }
+}
+
+@mixin respond-from($breakpoint) {
+    @media all and (min-width: $breakpoint + px) { @content; }
+}
+
+@mixin respond-from-to($from, $to) {
+    @media all and (min-width: $from + px) and (max-width: $to + px) { @content; }
+}
+
+$blue: #008EC2;
+$light-blue: #E8F9FF;
+$shadow: #f6f6f6; 
+$gray: #9B9B9B;
+$dark-gray: #6D7375;
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+button{
+    cursor: pointer;
+}
+
+header{
+    width: 100%;
+    margin: 0 0 35px;
+}
+
+.header-beam{
+    background: $blue;
+}
+ 
+#logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    padding: 10px 38px;
+    display: inline-block;
+    width: 120px
+}
+
+#main-navigation{
+    display: inline-block;
+    float: right;
+
+    ul{
+        font-size: 17px;
+        font-weight: 600;
+        list-style-type: none;
+        color: #ffffff;
+        padding: 7px 37px 5px 18px;
+        margin: 11px 0;
+        border-left: 1px solid #ffffff;
+    }
+
+    .icon-power{
+        font-size: 23px;
+        margin: -5px 0 0;
+    }
+}
+
+.clearfix{
+    clear:both;
+}
+
+.container {
+    width: 1438px;
+    margin: 0 auto;
+}
+
+.content {
+    width: 980px;
+    margin: 0 auto;
+}
+
+.content-header{
+    font-size: 32px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.orders{
+    background: $light-blue;
+    box-shadow: 0 2px 3px 2px $shadow;
+    padding: 20px 0;
+}
+
+.orders-content{
+    width: 980px;
+    margin: 0 auto;
+}
+
+.orders-tabs{
+    list-style-type: none;
+    padding: 0;
+    margin: 31px auto 0;
+    min-height: 46px;
+
+    li{
+        font-size: 18px;
+        float: left;
+        position: relative;
+        padding: 10px 26px;
+        border-radius: 5px 5px 0 0; 
+        margin: 0 auto;
+        cursor: pointer;
+        z-index: 0;
+
+        &:hover, &.active{
+            background: $light-blue;
+            box-shadow: 0 0 3px 0 $shadow;
+
+            &:after{
+                content: "";
+                position: absolute;
+                bottom:-4px;
+                left: 0;
+                background: $light-blue;
+                width: 100%;
+                height: 4px;
+            }
+        }
+    }
+}
+
+.orders-actions{
+    margin: 10px 0 22px;
+}
+
+.btn {
+    border: 0;
+    box-shadow: 0 0 2px 0px #b0b0b0;
+}
+
+.btn-standard-size {
+    font-size: 14px;
+    padding: 8px 15px 9px;
+    border-radius: 5px;
+
+    .icon-plus{
+        font-size: 14px;
+        margin: 0 6px 0 -6px;
+        top: 0px;
+        position: relative;
+    }
+}
+
+.btn-white {
+    background: #ffffff;
+}
+
+.btn-blue {
+    background: #008EC2;
+    color: #ffffff;
+}
+
+.orders-header{
+    width: 100%;
+    height: 23px;
+    color: #ABC5E4;
+
+    div{
+        font-size: 13px;
+        display: inline-block;
+        float: left;
+    }
+
+    &.order-details-header{
+        color: $gray;
+        float: left;
+        margin: 0 0 -3px;
+    }
+}
+
+.orders-restaurant{
+    padding: 0 0 0 20px;
+    width: 280px;
+}
+
+.orders-owner {
+    width: 203px;
+}
+
+.orders-ordered-item{
+    background: #ffffff;
+    width: 100%;
+    float: left;
+    border-radius: 6px;
+    box-shadow: 1px 2px 2px 0 #b0b0b0;
+
+    .ordered-item-details{
+        display: none;
+    }
+
+    .icon-angle-down{
+        @include transition(0.3s);
+    }
+
+    &.active{
+        .ordered-item-header{
+            border-radius: 0;
+        }
+
+        .ordered-item-details{
+            display: block;
+        }
+
+        .icon-angle-down{
+            @include rotate(180deg);
+        }
+    }
+}
+
+.ordered-item-header{
+    padding: 7px 0;
+    border-bottom: 1px solid #F6F6F6;
+    float: left;
+    width: 100%;
+    border-radius: 6px;
+
+    div{
+        float: left;
+        font-size: 14px;
+        font-weight: 600;
+        height: 22px;
+    }
+
+    .orders-restaurant{
+        width: 245px;
+        padding: 8px 20px;
+        border-right: 1px solid #F6F6F6;
+    }
+
+    .orders-owner{
+        padding: 8px 0 8px 15px;
+        width: 185px;
+        border-right: 1px solid #F6F6F6;
+    }
+
+    .orders-price{
+        padding: 8px 0 8px 16px;
+        font-size: 15px;
+    }
+
+    .icon-angle-down{
+        float: right;
+        margin: 8px 20px 0 0;
+        font-size: 22px;
+    }
+}
+
+.ordered-item-details-meta{
+    float: left;
+    width: 100%;
+    margin: 0 0 16px 0;
+}
+
+.ordered-item-actions{
+    padding: 17px 20px;   
+    width: 410px;
+    float: left;
+}
+
+.ordered-item-status{
+    float: left;
+    width: 520px;
+    padding: 17px 0 0;
+
+    > span{
+        float: left;
+        font-size: 13px;
+        margin: 7px 11px 0 0;
+    }
+}
+
+.status-tabs{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    float: left;
+    box-shadow: 0 0 2px 0px #b0b0b0;
+    border-radius: 3px;
+
+    li{
+        font-size: 14px;
+        display: inline-block;
+        float: left;
+        background: #ffffff;
+        padding: 8px 16px 7px 3px;
+        position: relative;
+
+        i{
+            margin: 0 2px 0 8px;
+        }
+
+        &:nth-last-child(1){
+            &:before, &:after{
+                display: none;
+            }
+        }
+
+        &:before{
+            content:" ";
+            position: absolute;
+            right: -12px;
+            top: -1px;
+            width: 0; 
+            height: 0; 
+            z-index: 8;
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-left: 12px solid #b0b0b0;
+            opacity: 0.2;
+        }
+
+        &:after{
+            content:" ";
+            position: absolute;
+            right: -10px;
+            top: -1px;
+            z-index: 9;
+            width: 0;
+            height: 0; 
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-left: 12px solid white;
+        } 
+    }
+
+    .current{
+        border: 2px solid $blue;
+        border-right: 2px solid transparent;
+        padding-top: 5px;
+        padding-bottom: 6px;
+        color: $blue;
+        background: #ffffff;
+        border-radius: 3px 0 0 3px;
+
+        &:before{
+            width: 20px;
+            height: 2px;
+            top: 6px;
+            right: -15px;
+            background: $blue;
+            border-top: 0 solid transparent;
+            border-bottom: 0 solid transparent;
+            border-left: 0 solid white;
+            opacity: 1;
+            z-index: 99;
+            @include rotate(60deg);
+        }
+
+        &:after{
+            width: 20px;
+            height: 2px;
+            top: 23px;
+            right: -15px;
+            background: $blue;
+            border-top: 0 solid transparent;
+            border-bottom: 0 solid transparent;
+            border-left: 0 solid white;
+            opacity: 1;
+            z-index: 99;
+            @include rotate(300deg);
+        }
+    }
+
+    .status-tab-disabled{
+        background: #F0F0F0;
+        padding-right: 14px;
+
+        &:after{
+            border-left: 12px solid #F0F0F0;
+        }
+
+        i{
+            margin: 0 2px 0 10px;
+        }
+    }
+}
+
+.ordered-meals-list{
+    float: left;
+    padding-bottom: 15px;
+}
+
+.ordered-meal{
+    float: left;
+    padding: 16px 0;
+
+    &:nth-child(even) {
+        background: #F9F9F9;
+    }
+
+    > div{
+        float: left;
+        font-size: 13px;
+    }
+}
+
+.ordered-meal-name{
+    padding: 0 0 0 20px;
+    width: 280px;
+}
+
+.ordered-meal-orderer{
+    width: 200px;
+}
+
+.ordered-meal-price{
+    width: 398px;
+}
+
+.ordered-meal-actions{
+    width: 82px;
+
+    .btn{
+        background: transparent;
+        border: 0; 
+        display: inline-block;
+        box-shadow: none;
+        padding: 0;
+        color: $dark-gray;
+
+        &:hover{
+            color: #000000;
+            border: 1px solid $gray;
+        }
+    }
+}
+
+.footer{
+    text-align: center;
+    background: #D2E9F1;
+    padding: 13px 0;
+    font-size: 13px;
+    color: $dark-gray;
+
+    p{
+        margin: 0;
+    }
+}
+
+@include respond-to(1450) {
+    .container{
+        width: 100%;
+    }
+}
