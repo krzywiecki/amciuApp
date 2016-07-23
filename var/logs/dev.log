@@ -2,3 +2,5 @@
 [2016-07-23 14:35:03] request.INFO: Matched route "{route}". {"route":"homepage","route_parameters":{"_controller":"AppBundle\\Controller\\DefaultController::indexAction","_route":"homepage"},"request_uri":"http://amciuapp.local/app_dev.php/","method":"GET"} []
 [2016-07-23 14:35:03] security.INFO: Populated the TokenStorage with an anonymous Token. [] []
 [2016-07-23 14:35:03] request.INFO: Matched route "{route}". {"route":"_wdt","route_parameters":{"_controller":"web_profiler.controller.profiler:toolbarAction","token":"150468","_route":"_wdt"},"request_uri":"http://amciuapp.local/app_dev.php/_wdt/150468","method":"GET"} []
+[2016-07-23 14:44:23] php.DEBUG: unlink(/var/www/amciuApp/var/cache/de~/profiler/index.csv): Permission denied {"type":2,"file":"/var/www/amciuApp/vendor/symfony/symfony/src/Symfony/Component/Filesystem/Filesystem.php","line":178,"level":28928} []
+[2016-07-23 14:45:47] php.DEBUG: unlink(/var/www/amciuApp/var/cache/de~/profiler/index.csv): Permission denied {"type":2,"file":"/var/www/amciuApp/vendor/symfony/symfony/src/Symfony/Component/Filesystem/Filesystem.php","line":178,"level":28928} []
