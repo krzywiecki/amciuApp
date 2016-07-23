@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="../dist/css/style.css">
-    <link rel="stylesheet" href="../dist/fontello/font/icons.css">
+    <link rel="stylesheet" href="{{ asset('/dist/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/dist/fontello/font/icons.css') }}">
 
     <style>
         #overlay.active{
@@ -25,7 +25,7 @@
             <nav id="main-navigation">
                 <ul> 
                     <li>  
-                        <a href="#"><i class="icon-power"></i> Sign Out</a>
+                        <a href="#"><i class="icon-power"></i> Sign Out</a> 
                     </li> 
                 </ul>
             </nav>
@@ -130,7 +130,7 @@
     //         this.className = 'active';
     //     }
 
-    // }, false);
+    // }, false); 
 
     var headers = document.getElementsByClassName('ordered-item-header'),
         showHideDetails = function() {
@@ -145,6 +145,18 @@
     [].map.call(headers, function(elem) {
         elem.addEventListener("click", showHideDetails);
     });
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/app_dev.php/orders/new');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState != 4 || xhr.status != 200) {
+            return;
+        }
+    };
+    var data = JSON.stringify({"restaurant":"cztery jelenie","owner":"DK"});
+    xhr.send(data);
+
 
 </script>
 <script type="text/javascript">document.write('<script src="//localhost:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script>
