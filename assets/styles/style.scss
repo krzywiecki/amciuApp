@@ -221,6 +221,7 @@ header{
     }
 
     .icon-angle-down{
+        cursor: pointer;
         @include transition(0.3s);
     }
 

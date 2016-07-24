@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Amciu App</title>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="{{ asset('/dist/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/dist/fontello/font/icons.css') }}">
+
+    <style>
+        #overlay.active{
+            opacity: 0.3 !important;
+        }
+    </style>  
+    
+</head> 
+<body>
+    <!-- <img id="overlay" class="active" src="../media/Desktop/helper.png" style="position:absolute;top:0;left:50%;margin-left:-720px;opacity: 0;z-index:99;"> -->
+
+    <header class="header-beam">
+        <div class="container">
+            <h1 id="logo">AmciuApp</h1>
+            <nav id="main-navigation">
+                <ul> 
+                    <li>  
+                        <a href="#"><i class="icon-power"></i> Sign Out</a> 
+                    </li> 
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="content content-header">
+            orders
+        </h2>
+
+        <div class="content">
+            <ul class="orders-tabs">
+                <li class="active">Active</li>
+                <li>History</li>
+            </ul>
+        </div>
+
+        <div class="orders">
+            <div class="orders-content">  
+                <div class="orders-actions">
+                    <button class="btn btn-standard-size btn-white">
+                        <i class="icon-plus"></i>Create Order
+                    </button>
+                </div>
+
+                <div class="orders-list">
+                    <div class="orders-header">
+                        <div class="orders-restaurant">Order from</div>
+                        <div class="orders-owner">Owner</div>
+                        <div class="orders-price">Price</div>
+                    </div>
+
+                    <div class="orders-ordered-item">
+                        <div class="ordered-item-header">
+                            <div class="orders-restaurant">4 jelenie</div>
+                            <div class="orders-owner">Dominik Krzywiecki</div>
+                            <div class="orders-price">140,20</div>
+                            <div class="icon-angle-down"></div>
+                        </div>
+                        <div class="ordered-item-details">
+                            <div class="ordered-item-details-meta">
+                                <div class="ordered-item-actions">
+                                    <button class="btn btn-standard-size btn-blue"><i class="icon-plus"></i>Add Meal</button>
+                                </div>
+                                <div class="ordered-item-status">
+                                    <span>Status:</span>
+                                    <ul class="status-tabs">
+                                        <li class="current"><i class="icon-pencil"></i>Opened</li>
+                                        <li><i class="icon-lock"></i>Finalized</li>
+                                        <li class="status-tab-disabled"><i class="icon-phone"></i>Ordered</li>
+                                        <li class="status-tab-disabled"><i class="icon-ok"></i>Delivered</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="orders-header order-details-header">
+                                <div class="orders-restaurant">Meal</div>
+                                <div class="orders-owner">Ordered</div>
+                                <div class="orders-price">Price</div>
+                            </div>
+                            <div class="ordered-meals-list">
+                                <div class="ordered-meal">
+                                    <div class="ordered-meal-name">Zestaw obiadowy z surówką</div>
+                                    <div class="ordered-meal-orderer">Dominik Krzywiecki</div>
+                                    <div class="ordered-meal-price">12,10</div>
+                                    <div class="ordered-meal-actions">
+                                        <button class="btn btn-edit"><i class="icon-edit"></i></button>
+                                        <button class="btn btn-delete"><i class="icon-trash-empty"></i></button>
+                                    </div>
+                                </div>
+                                <div class="ordered-meal">
+                                    <div class="ordered-meal-name">Zupa z ryżem</div>
+                                    <div class="ordered-meal-orderer">Dominik Krzywiecki</div>
+                                    <div class="ordered-meal-price">5,99</div>
+                                    <div class="ordered-meal-actions">
+                                        <button class="btn btn-edit"><i class="icon-edit"></i></button>
+                                        <button class="btn btn-delete"><i class="icon-trash-empty"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="clearfix"></p>
+                        </div>
+                    </div> 
+                    <p class="clearfix"></p>
+                </div> 
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <p>&copy; Amciu & Partners 2016</p> 
+    </footer>
+</body>
+
+<script>
+    // var overlay = document.getElementById('overlay');
+    // overlay.addEventListener("click", function(e){ 
+        
+    //     if(this.className == 'active') {
+    //         this.className = '';
+    //     } else {
+    //         this.className = 'active';
+    //     }
+
+    // }, false); 
+
+    var headers = document.getElementsByClassName('ordered-item-header'),
+        showHideDetails = function() {
+            var item = this.parentNode;
+            if(item.className == 'orders-ordered-item') {
+                item.classList.add('active');
+                
+            } else {
+                item.classList.remove('active');
+            }
+        };
+    [].map.call(headers, function(elem) {
+        elem.addEventListener("click", showHideDetails);
+    });
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/app_dev.php/restaurant/');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState != 4 || xhr.status != 200) {
+            return;
+        }
+    };
+    var data = JSON.stringify({"orderId":1,"mealId":1,"ownerId":1});
+    xhr.send(data);
+
+
+</script>
+<script type="text/javascript">document.write('<script src="//localhost:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script>
+</html>

@@ -22,3 +22,8 @@ gulp
 ```
 gulp watch
 ```
+
+## Backend
+```
+composer install
+```

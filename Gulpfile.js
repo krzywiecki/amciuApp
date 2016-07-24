@@ -7,10 +7,10 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var livereload = require('gulp-livereload');
 
-const htmlDir = "./templates/*.html";
+const htmlDir = ".app/Resources/views/*.html";
 const stylesDir = "./assets/styles/*.scss";
 const assetsDir = './assets/';
-const distDir = './dist/';
+const distDir = './web/dist/';
 
 gulp.task('copyfonts', function() {
    return gulp.src(assetsDir + 'fontello/font/*.{ttf,woff,eof,svg}')
