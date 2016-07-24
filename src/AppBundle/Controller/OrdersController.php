@@ -29,12 +29,39 @@ class OrdersController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $orders['orders'] = $em->getRepository('AppBundle:Orders')->findAll();
-
         $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($orders, 'json');
-        
-        return new Response($reports, 200, array(
+
+        $orders['orders'] = $em->getRepository('AppBundle:Orders')->findAll();
+        $orders = json_decode($serializer->serialize($orders, 'json'));
+
+        for($i = 0; $i < sizeof($orders->orders); $i++) {
+            $orderedMeals = $em->getRepository('AppBundle:OrderedMeal')->findByOrderId($orders->orders[$i]->id);
+            $k = sizeof($orderedMeals);
+
+            for($j = 0; $j < $k; $j++) {
+                $orderedMealsObj = json_decode($serializer->serialize($orderedMeals[$j], 'json'));
+                
+                $meal = $em->getRepository('AppBundle:Meal')->findOneById($orderedMealsObj->meal_id);
+                $meal = json_decode($serializer->serialize($meal, 'json'));
+                
+                $user = $em->getRepository('AppBundle:User')->findOneById($orderedMealsObj->owner_id);
+                $user = json_decode($serializer->serialize($user, 'json'));
+
+                $orderedMealsObj->mealName = $meal->name;
+                $orderedMealsObj->owner = $user->user;
+
+                unset($orderedMealsObj->meal_id);
+                unset($orderedMealsObj->order_id);
+                unset($orderedMealsObj->owner_id);
+                
+                $orders->orders[$i]->orderedMeals[$j] = $orderedMealsObj;
+            }
+            
+        }
+
+        $orders = json_encode($orders);
+
+        return new Response($orders, 200, array(
             'Content-Type' => 'application/json'
         ));
     }

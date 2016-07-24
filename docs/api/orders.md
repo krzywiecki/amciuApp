@@ -41,6 +41,12 @@ content:
         "price": @int@
         "restaurant": @string@
         "status": @status@
+        "orderedMeals": {
+          "id": @int@
+          "mealName": @string@
+          "owner": @string@
+          "price": @int@
+        }
     },
     ...
   ]
