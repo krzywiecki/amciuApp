@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Meal;
@@ -19,17 +20,22 @@ class MealController extends Controller
     /**
      * Lists all Meal entities.
      *
-     * @Route("/", name="meal_index")
+     * @Route("/{id}", name="meal_index")
      * @Method("GET")
+     *
+     * @param $id
+     * @return JsonResponse
      */
-    public function indexAction()
+    public function indexAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $meals['meals'] = $em->getRepository('AppBundle:Meal')->findByRestaurantId($id);
 
-        $meals = $em->getRepository('AppBundle:Meal')->findAll();
-
-        return $this->render('meal/index.html.twig', array(
-            'meals' => $meals,
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($meals, 'json');
+        
+        return new Response($reports, 200, array(
+            'Content-Type' => 'application/json'
         ));
     }
 

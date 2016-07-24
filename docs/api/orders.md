@@ -81,12 +81,32 @@ content:
 {
   "restaurants": [
     {
-        "created": @datetime@,
         "id": @int@,
-        "owner": @string@
+        "name": @string@
+    },
+    ...
+  ]
+}
+```
+
+### get meals list from restaurant
+
+request:
+```
+url: /meal/{restaurantId}
+method: GET
+```
+response on success:
+```
+status: 200
+format: json
+content:
+{
+  "meals": [
+    {
+        "id": @int@,
+        "name": @string@
         "price": @int@
-        "restaurant": @string@
-        "status": @status@
     },
     ...
   ]
