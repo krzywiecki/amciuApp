@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use AppBundle\Entity\Orders;
 use AppBundle\Form\OrdersType;
 
@@ -22,15 +23,19 @@ class OrdersController extends Controller
      *
      * @Route("/", name="orders_index")
      * @Method("GET")
+     *
+     * @return JsonResponse
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $orders['orders'] = $em->getRepository('AppBundle:Orders')->findAll();
 
-        $orders = $em->getRepository('AppBundle:Orders')->findAll();
-
-        return $this->render('orders/index.html.twig', array(
-            'orders' => $orders,
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($orders, 'json');
+        
+        return new Response($reports, 200, array(
+            'Content-Type' => 'application/json'
         ));
     }
 

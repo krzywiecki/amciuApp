@@ -4,7 +4,7 @@ Orders endpoints
 
 request:
 ```
-url: /create/new
+url: /orders/new
 method: POST
 format: json
 data:
@@ -18,4 +18,31 @@ response on success:
 status: 200
 format: json
 id: @orderId
+```
+
+### orders list
+
+request:
+```
+url: /orders/
+method: GET
+```
+response on success:
+```
+status: 200
+format: json
+content:
+{
+  "orders": [
+    {
+        "created": @datetime@,
+        "id": @int@,
+        "owner": @string@
+        "price": @int@
+        "restaurant": @string@
+        "status": @status@
+    },
+    ...
+  ]
+}
 ```

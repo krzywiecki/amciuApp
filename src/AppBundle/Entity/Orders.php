@@ -119,7 +119,7 @@ class Orders
     /**
      * Set price
      *
-     * * @ORM\PrePersist
+     * @ORM\PrePersist
      * @param integer $price
      *
      * @return Orders
