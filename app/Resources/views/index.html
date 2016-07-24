@@ -147,14 +147,14 @@
     });
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/app_dev.php/orders/');
+    xhr.open('POST', '/app_dev.php/orderedmeal/new');
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.onreadystatechange = function () {
         if (xhr.readyState != 4 || xhr.status != 200) {
             return;
         }
     };
-    var data = JSON.stringify({"restaurant":"cztery jelenie","owner":"DK"});
+    var data = JSON.stringify({"orderId":1,"mealId":1,"ownerId":1});
     xhr.send(data);
 
 

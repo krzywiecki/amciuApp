@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>OrderedMeal list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mealid</th>
+                <th>Orderid</th>
+                <th>Ownerid</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for orderedMeal in orderedMeals %}
+            <tr>
+                <td><a href="{{ path('orderedmeal_show', { 'id': orderedMeal.id }) }}">{{ orderedMeal.id }}</a></td>
+                <td>{{ orderedMeal.mealId }}</td>
+                <td>{{ orderedMeal.orderId }}</td>
+                <td>{{ orderedMeal.ownerId }}</td>
+                <td>{{ orderedMeal.price }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('orderedmeal_show', { 'id': orderedMeal.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('orderedmeal_edit', { 'id': orderedMeal.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('orderedmeal_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

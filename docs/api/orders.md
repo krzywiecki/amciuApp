@@ -46,3 +46,22 @@ content:
   ]
 }
 ```
+
+### add meal to order
+
+request:
+```
+url: /orderedmeal/new
+method: POST
+format: json
+data:
+{
+	orderId: @id
+	mealId: @id
+	ownerId: @id
+}
+```
+response on success:
+```
+status: 200
+```
