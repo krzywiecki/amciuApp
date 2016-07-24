@@ -65,3 +65,30 @@ response on success:
 ```
 status: 200
 ```
+
+### get restaurants list
+
+request:
+```
+url: /restaurant/
+method: GET
+```
+response on success:
+```
+status: 200
+format: json
+content:
+{
+  "restaurants": [
+    {
+        "created": @datetime@,
+        "id": @int@,
+        "owner": @string@
+        "price": @int@
+        "restaurant": @string@
+        "status": @status@
+    },
+    ...
+  ]
+}
+```

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Restaurant;
@@ -21,15 +22,19 @@ class RestaurantController extends Controller
      *
      * @Route("/", name="restaurant_index")
      * @Method("GET")
+     *
+     * @return JsonResponse
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $restaurants['restaurants'] = $em->getRepository('AppBundle:Restaurant')->findAll();
 
-        $restaurants = $em->getRepository('AppBundle:Restaurant')->findAll();
-
-        return $this->render('restaurant/index.html.twig', array(
-            'restaurants' => $restaurants,
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($restaurants, 'json');
+        
+        return new Response($reports, 200, array(
+            'Content-Type' => 'application/json'
         ));
     }
 
