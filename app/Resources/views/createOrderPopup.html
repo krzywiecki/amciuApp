@@ -1,0 +1,23 @@
+<div class="overlay active"></div>
+<div ng-controller="CreateOrderController" class="popup active" data-name="create-order">
+    <p class="popup-header">Create Order <a href="/"><i class="popup-icon-close icon-cancel"></i></a></p>
+    <fieldset class="popup-fieldset">
+        <form ng-submit="createOrder()">
+            
+            <label class="popup-form-label">Orders from</label>
+            <select ng-model="restaurant" class="popup-form-select">
+                <option ng-repeat="restaurant in restaurants" value="{[{ restaurant.name }]}">{[{ restaurant.name }]}</option>
+            </select>
+
+            <label class="popup-form-label">Owner Name</label>
+            <select ng-model="owner" class="popup-form-select">
+                <option ng-repeat="user in users" value="{[{ user.user }]}">{[{ user.user }]}</option>
+            </select>
+            
+            <div class="popup-buttons">
+                <a href="/" class="btn btn-standard-size btn-white">Cancel</a>
+                <button class="btn btn-standard-size btn-blue">Create</button>
+            </div>  
+        </form>
+    </fieldset>        
+</div>

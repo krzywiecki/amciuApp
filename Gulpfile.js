@@ -7,7 +7,7 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var livereload = require('gulp-livereload');
 
-const htmlDir = ".app/Resources/views/*.html";
+const htmlDir = "./app/Resources/views/*.html";
 const stylesDir = "./assets/styles/*.scss";
 const assetsDir = './assets/';
 const distDir = './web/dist/';

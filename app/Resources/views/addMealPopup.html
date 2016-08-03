@@ -1,0 +1,22 @@
+<div class="overlay active"></div>
+<div ng-controller="AddMealController" class="popup active" data-name="add-meal">
+    <p class="popup-header">Add meal <a href="/"><i class="popup-icon-close icon-cancel"></i></a></p>
+
+    <fieldset class="popup-fieldset">
+        <form>
+            <label class="popup-form-label">Meal Name</label>
+            <input class="popup-form-input" type="text" placeholder="Meal name">
+            <label class="popup-form-label">Orderer Name</label>
+            <select class="popup-form-select">
+                <option value="1">Dominik Krzywiecki</option>
+                <option value="2">Dominik Krzywiecki</option>
+            </select>
+            <label class="popup-form-label">Price</label>
+            <input class="popup-form-input" type="text" placeholder="Prize">
+            <div class="popup-buttons">
+                <a href="/" class="btn btn-standard-size btn-white">Cancel</a>
+                <button class="btn btn-standard-size btn-blue">Create</button>
+            </div>  
+        </form>
+    </fieldset>        
+</div>

@@ -7,15 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="{{ asset('/dist/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/dist/fontello/font/icons.css') }}">
-    <style>
-        #overlay.active{
-            opacity: 0.3 !important;
-        }
-    </style>  
+    <link rel="stylesheet" href="{{ asset('/dist/fontello/font/icons.css') }}"> 
+    <base href="/"> 
 </head> 
 <body ng-app="amciu">
-    <!-- <img id="overlay" class="active" src="../media/Desktop/helper.png" style="position:absolute;top:0;left:50%;margin-left:-720px;opacity: 0;z-index:99;"> -->
+
+    <div ng-view></div>
 
     <header class="header-beam">
         <div class="container">
@@ -45,9 +42,9 @@
         <div class="orders">
             <div class="orders-content">  
                 <div class="orders-actions">
-                    <button class="btn btn-standard-size btn-white">
+                    <a href="{[{ basePath }]}/createOrder" class="btn btn-standard-size btn-white">
                         <i class="icon-plus"></i>Create Order
-                    </button>
+                    </a>
                 </div>
 
                 <div class="orders-list">
@@ -67,7 +64,7 @@
                         <div class="ordered-item-details">
                             <div class="ordered-item-details-meta">
                                 <div class="ordered-item-actions">
-                                    <button class="btn btn-standard-size btn-blue" ng-show="order.status == 'opened'"><i class="icon-plus"></i>Add Meal</button>
+                                    <a href="{[{ basePath }]}/addMeal/{[{ order.id }]}" class="btn btn-standard-size btn-blue" ng-show="order.status == 'opened'"><i class="icon-plus"></i>Add Meal</a>
                                 </div>
                                 <div class="ordered-item-status">
                                     <span>Status:</span>
@@ -101,7 +98,7 @@
                     </div> 
                     <p class="clearfix"></p>
                 </div> 
-            </div>
+            </div> 
         </div>
     </main>
     <footer class="footer">
@@ -109,17 +106,14 @@
     </footer>
 </body>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
     <script src="{{ asset('/dist/js/main.min.js') }}"></script>
     <script>
-        // var overlay = document.getElementById('overlay');
-        // overlay.addEventListener("click", function(e){ 
-            
-        //     if(this.className == 'active') {
-        //         this.className = '';
-        //     } else {
-        //         this.className = 'active';
-        //     }
-
-        // }, false); 
+        var basePath = '{{ app.request.getBaseURL() }}';
+        window.ENV = '{{ app.environment }}';
     </script>
+
+    {% if app.environment == 'dev' %}
+        <script type="text/javascript">document.write('<script src="//localhost:35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script>
+    {% endif %}
 </html>

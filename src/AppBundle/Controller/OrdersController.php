@@ -31,7 +31,8 @@ class OrdersController extends Controller
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->container->get('serializer');
 
-        $orders['orders'] = $em->getRepository('AppBundle:Orders')->findAll();
+        $orders['orders'] = $em->getRepository('AppBundle:Orders')->findBy(array(), array('id' => 'DESC'));
+
         $orders = json_decode($serializer->serialize($orders, 'json'));
 
         for($i = 0; $i < sizeof($orders->orders); $i++) {

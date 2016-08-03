@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\User;
@@ -25,11 +26,13 @@ class UserController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $users['users'] = $em->getRepository('AppBundle:User')->findAll();
 
-        $users = $em->getRepository('AppBundle:User')->findAll();
-
-        return $this->render('user/index.html.twig', array(
-            'users' => $users,
+        $serializer = $this->container->get('serializer');
+        $reports = $serializer->serialize($users, 'json');
+        
+        return new Response($reports, 200, array(
+            'Content-Type' => 'application/json'
         ));
     }
 
